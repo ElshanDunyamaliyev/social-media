@@ -1,12 +1,19 @@
 package dev.elshan.socialmedia.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "comments")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Comment {
 
     @Id
