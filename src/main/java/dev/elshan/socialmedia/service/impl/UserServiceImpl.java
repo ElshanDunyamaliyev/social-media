@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
@@ -14,11 +16,16 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
-
     @Override
     public User getUserById(Long userId) {
         return repository.findById(userId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND,"No user found with this id"));
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return repository.findAll();
+    }
+
 
     @Override
     public void addUser(User user) {

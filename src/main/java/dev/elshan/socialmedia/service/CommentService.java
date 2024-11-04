@@ -5,7 +5,7 @@ import dev.elshan.socialmedia.model.Comment;
 public interface CommentService {
 
     Comment getCommentById(Long commentId);
-    void addComment();
-    void updateComment();
-    void deleteComment();
+    void addComment(Comment comment);
+    void updateComment(Long commentId,Comment comment);
+    void deleteComment(Long commentId);
 }
