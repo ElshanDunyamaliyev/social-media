@@ -1,5 +1,6 @@
 package dev.elshan.socialmedia.controller;
 
+import dev.elshan.socialmedia.dto.PostUpdateRequest;
 import dev.elshan.socialmedia.model.Post;
 import dev.elshan.socialmedia.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public void updatePost(@PathVariable Long id, @RequestBody Post post){
-        service.updatePost(id, post);
+    public void updatePost(@PathVariable Long id, @RequestBody PostUpdateRequest request){
+        service.updatePost(id, request);
     }
 
     @DeleteMapping("/{id}")

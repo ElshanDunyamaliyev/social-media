@@ -21,7 +21,7 @@ public class Post {
     @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false,name = "user_id")
+    @Column(nullable = false,name = "content")
     private String content;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
@@ -29,4 +29,8 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Like> likes;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

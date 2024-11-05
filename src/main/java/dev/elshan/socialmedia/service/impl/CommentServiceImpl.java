@@ -1,8 +1,11 @@
 package dev.elshan.socialmedia.service.impl;
 
+import dev.elshan.socialmedia.dto.CommentCreateRequest;
 import dev.elshan.socialmedia.model.Comment;
 import dev.elshan.socialmedia.repository.CommentRepository;
 import dev.elshan.socialmedia.service.CommentService;
+import dev.elshan.socialmedia.service.PostService;
+import dev.elshan.socialmedia.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,6 +16,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository repository;
+    private final UserService userService;
+    private final PostService postService;
 
     @Override
     public Comment getCommentById(Long commentId) {
@@ -20,7 +25,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void addComment(Comment comment) {
+    public void addComment(CommentCreateRequest request) {
+        var comment = Comment
+                .builder()
+                .content(request.getContent())
+                .user(userService.getUserById(request.getUserId()))
+                .post(postService.getPostById(request.getPostId()))
+                .build();
         repository.save(comment);
     }
 
