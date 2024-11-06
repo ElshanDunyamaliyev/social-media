@@ -1,5 +1,6 @@
 package dev.elshan.socialmedia.controller;
 
+import dev.elshan.socialmedia.dto.request.CommentCreateRequest;
 import dev.elshan.socialmedia.model.Comment;
 import dev.elshan.socialmedia.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class CommentController {
     }
 
     @PostMapping
-    public void createComment(@RequestBody Comment comment){
-        service.addComment(comment);
+    public void createComment(@RequestBody CommentCreateRequest request){
+        service.addComment(request);
     }
 }

@@ -1,10 +1,8 @@
 package dev.elshan.socialmedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Comment {
 
     @Id
@@ -24,6 +23,13 @@ public class Comment {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
-    private List<Like> likes;
+    private long likes = 0L;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -1,1 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5632/socialmedia
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
 
+
+
+server:
+  port: 8086

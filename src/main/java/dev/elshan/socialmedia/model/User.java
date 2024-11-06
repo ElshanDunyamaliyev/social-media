@@ -1,10 +1,8 @@
 package dev.elshan.socialmedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
+@JsonIgnoreProperties({"posts", "comments"})
 public class User {
 
     @Id
@@ -36,9 +36,9 @@ public class User {
     @Column(name = "about")
     private String about;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 }

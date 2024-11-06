@@ -1,10 +1,12 @@
 package dev.elshan.socialmedia.service.impl;
 
+import dev.elshan.socialmedia.dto.request.UserCreateRequest;
 import dev.elshan.socialmedia.model.User;
 import dev.elshan.socialmedia.repository.UserRepository;
 import dev.elshan.socialmedia.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -17,8 +19,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
+//    @Transactional
     public User getUserById(Long userId) {
-        return repository.findById(userId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND,"No user found with this id"));
+        var user = repository.findById(userId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND,"No user found with this id"));
+        return user;
     }
 
     @Override
@@ -26,9 +30,16 @@ public class UserServiceImpl implements UserService {
         return repository.findAll();
     }
 
-
     @Override
-    public void addUser(User user) {
+    public void addUser(UserCreateRequest request) {
+        var user = User
+                .builder()
+                .username(request.getUsername())
+                .about(request.getAbout())
+                .profilePicture(request.getProfilePicture())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .build();
         repository.save(user);
     }
 
