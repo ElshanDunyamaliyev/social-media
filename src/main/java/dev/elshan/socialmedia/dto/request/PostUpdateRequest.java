@@ -1,4 +1,4 @@
-package dev.elshan.socialmedia.dto;
+package dev.elshan.socialmedia.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentCreateRequest {
+public class PostUpdateRequest {
     private String content;
-    private Long postId;
     private Long userId;
 }

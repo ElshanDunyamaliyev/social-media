@@ -1,6 +1,8 @@
 package dev.elshan.socialmedia.service.impl;
 
-import dev.elshan.socialmedia.dto.PostUpdateRequest;
+import dev.elshan.socialmedia.dto.request.PostCreateRequest;
+import dev.elshan.socialmedia.dto.request.PostUpdateRequest;
+import dev.elshan.socialmedia.dto.response.PostResponse;
 import dev.elshan.socialmedia.model.Post;
 import dev.elshan.socialmedia.repository.PostRepository;
 import dev.elshan.socialmedia.service.PostService;
@@ -22,7 +24,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void addPost(Post post) {
+    public void addPost(PostCreateRequest request) {
+        var post = Post.builder().content(request.getContent()).build();
         repository.save(post);
     }
 
@@ -37,5 +40,19 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(Long postId) {
         repository.deleteById(postId);
+    }
+
+    @Override
+    public void addLikeToPost(Long postId) {
+        var post = getPostById(postId);
+        post.setLikes(post.getLikes() + 1);
+        repository.save(post);
+    }
+
+    @Override
+    public void removeLikeFromPost(Long postId) {
+        var post = getPostById(postId);
+        post.setLikes(post.getLikes() - 1);
+        repository.save(post);
     }
 }

@@ -1,5 +1,6 @@
 package dev.elshan.socialmedia.controller;
 
+import dev.elshan.socialmedia.dto.request.UserCreateRequest;
 import dev.elshan.socialmedia.model.User;
 import dev.elshan.socialmedia.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ public class UserController {
     }
 
     @PostMapping
-    public void createUser(@RequestBody User user){
-        service.addUser(user);
+    public void createUser(@RequestBody UserCreateRequest request){
+        service.addUser(request);
     }
 
     @PutMapping("/{id}")

@@ -1,6 +1,8 @@
 package dev.elshan.socialmedia.controller;
 
-import dev.elshan.socialmedia.dto.PostUpdateRequest;
+import dev.elshan.socialmedia.dto.request.PostCreateRequest;
+import dev.elshan.socialmedia.dto.request.PostUpdateRequest;
+import dev.elshan.socialmedia.dto.response.PostResponse;
 import dev.elshan.socialmedia.model.Post;
 import dev.elshan.socialmedia.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +15,13 @@ public class PostController {
     private final PostService service;
 
     @GetMapping("/{id}")
-    public Post getService(@PathVariable Long id) {
+    public Post getPost(@PathVariable Long id) {
         return service.getPostById(id);
     }
 
     @PostMapping
-    public void createPost(@RequestBody Post post){
-        service.addPost(post);
+    public void createPost(@RequestBody PostCreateRequest request){
+        service.addPost(request);
     }
 
     @PutMapping("/{id}")
@@ -30,5 +32,15 @@ public class PostController {
     @DeleteMapping("/{id}")
     public void deletePost(@PathVariable Long id){
         service.deletePost(id);
+    }
+
+    @PutMapping("/like/add/{id}")
+    public void likePost(@PathVariable Long id){
+        service.addLikeToPost(id);
+    }
+
+    @PutMapping("/like/delete/{id}")
+    public void dislikePost(@PathVariable Long id){
+        service.removeLikeFromPost(id);
     }
 }

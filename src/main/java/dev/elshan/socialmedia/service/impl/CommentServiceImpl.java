@@ -1,6 +1,6 @@
 package dev.elshan.socialmedia.service.impl;
 
-import dev.elshan.socialmedia.dto.CommentCreateRequest;
+import dev.elshan.socialmedia.dto.request.CommentCreateRequest;
 import dev.elshan.socialmedia.model.Comment;
 import dev.elshan.socialmedia.repository.CommentRepository;
 import dev.elshan.socialmedia.service.CommentService;
@@ -45,5 +45,19 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void deleteComment(Long commentId) {
         repository.deleteById(commentId);
+    }
+
+    @Override
+    public void addLikeToComment(Long commentId) {
+        var comment = getCommentById(commentId);
+        comment.setLikes(comment.getLikes() + 1);
+        repository.save(comment);
+    }
+
+    @Override
+    public void removeLikeFromComment(Long commentId) {
+        var comment = getCommentById(commentId);
+        comment.setLikes(comment.getLikes() - 1);
+        repository.save(comment);
     }
 }

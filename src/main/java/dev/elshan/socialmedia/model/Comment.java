@@ -1,5 +1,6 @@
 package dev.elshan.socialmedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,8 +23,7 @@ public class Comment {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
-    private List<Like> likes;
+    private long likes = 0L;
 
     @ManyToOne
     @JoinColumn(name = "post_id")

@@ -1,6 +1,6 @@
 package dev.elshan.socialmedia.controller;
 
-import dev.elshan.socialmedia.dto.CommentCreateRequest;
+import dev.elshan.socialmedia.dto.request.CommentCreateRequest;
 import dev.elshan.socialmedia.model.Comment;
 import dev.elshan.socialmedia.service.CommentService;
 import lombok.RequiredArgsConstructor;
